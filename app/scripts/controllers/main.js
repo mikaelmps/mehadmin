@@ -58,30 +58,52 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
             },
             template: '<div container></div>',
             link: function(scope, ele, attr){
-                scope.heatmapInstance = h337.create({
-                  container: ele.find('div')[0]
-                });
-                scope.heatmapInstance.setData(scope.data);
+                //scope.heatmapInstance = h337.create({
+                //  container: ele.find('div')[0]
+                //});
+                //scope.heatmapInstance.setData(scope.data);
 
-                var ctx = ele.find('div')[0].firstChild.getContext('2d');
+                var drawPopUp = function(store){
+                    var rect = paper.rect(store.locationX, store.locationY - 50, 100 , 200);
+                    rect.attr("fill", "#fff");
+                    rect.attr("stroke", "#000");
+                };
 
-                function draw(lX, lY, cX, cY){
-                    // line from
-                    ctx.moveTo(lX,lY);
-                    // to
-                    ctx.lineTo(cX,cY);
-                    // color
-                    ctx.strokeStyle = "#4bf";
-                    // draw it
-                    ctx.stroke();
-                }
+                var paper = Raphael(200, 200, 800, 1000);
+
+                // Creates circle at x = 50, y = 40, with radius 10
+
+
+                // var ctx = ele.find('div')[0].firstChild.getContext('2d');
+
+                // function draw(lX, lY, cX, cY){
+                //     // line from
+                //     ctx.moveTo(lX,lY);
+                //     // to
+                //     ctx.lineTo(cX,cY);
+                //     // color
+                //     ctx.strokeStyle = "#4bf";
+                //     // draw it
+                //     ctx.stroke();
+                // }
                 scope.$watch('stores' ,function(){
                     _.each(scope.stores, function(store){
-                        if(store.marked){
-                            draw(store.locationX, store.locationY,store.locationX + 200,store.locationY+200);
-                        }
-                    });
-                }, true);
+                        var circle = paper.circle(store.locationX, store.locationY, store.hits);
+
+                            circle.hover(function(){
+                                drawPopUp(store);
+                                circle.attr({"stroke": "#E3E3E3"});
+                              },
+                              function(){
+                                circle.attr({"stroke": "#000"});
+                            });
+                            // Sets the fill attribute of the circle to red (#f00)
+                            circle.attr("fill", "#f00");
+
+                            // Sets the stroke attribute of the circle to white
+                            circle.attr("stroke", "#fff");
+                        });
+                    }, true);
 
 
 
