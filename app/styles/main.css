@@ -81,7 +81,7 @@ body {
     border-bottom: 0;
   }
 }
-heat-map {
+heat-map, #overlay{
     position: absolute;
     width: 800px;
     height: 650px;
