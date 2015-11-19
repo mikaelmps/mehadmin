@@ -85,8 +85,10 @@ heat-map {
     width: 840px;
     height: 400px;
     display: block;
+
 }
 
 heat-map div {
      height: 100%;
+     background-image: url('../images/mall-floor-plan.png')
 }

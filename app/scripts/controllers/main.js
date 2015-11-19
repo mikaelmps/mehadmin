@@ -5,15 +5,19 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
     var points = [];
 	function listStores() {
 		var stores = [
-			{name: 'Store 1', locationX: 5, locationY: 10, hits: 38},
-			{name: 'Store 2', locationX: 15, locationY: 12, hits: 28},
-			{name: 'Store 3', locationX: 35, locationY: 14, hits: 18}
+			{name: 'Store 1', locationX: 105, locationY: 110, hits: 38},
+			{name: 'Store 2', locationX: 215, locationY: 212, hits: 28},
+			{name: 'Store 3', locationX: 335, locationY: 314, hits: 18},
+            {name: 'Store 1', locationX: 405, locationY: 410, hits: 38},
+            {name: 'Store 2', locationX: 415, locationY: 412, hits: 28},
+            {name: 'Store 3', locationX: 435, locationY: 414, hits: 18}
 		];
         points = _.map(stores, function(store){
             var ret = {};
             ret.x = store.locationX;
             ret.y = store.locationY;
             ret.value = store.hits;
+            return ret;
         })
 	}
 
