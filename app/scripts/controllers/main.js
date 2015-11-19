@@ -31,9 +31,9 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 	}
 
     listStores();
-    $scope.showStore = function(store){
-        store.marked = true;
-    }
+    $scope.showStore = function(store, bool){
+        store.marked = bool;
+    };
 	// now generate some random data
             var max = 15;
             var width = 840;
@@ -56,7 +56,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                 data: '=',
                 stores:'='
             },
-            template: '<div container></div>',
+            template: '<div container><canvas id="overlay" style="width: 800px; height: 650px; posistion:absolute;"></canvas</div>',
             link: function(scope, ele, attr){
                 //scope.heatmapInstance = h337.create({
                 //  container: ele.find('div')[0]
@@ -93,27 +93,24 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                 //     // draw it
                 //     ctx.stroke();
                 // }
-                scope.$watch('stores' ,function(){
-                    _.each(scope.stores, function(store){
-                        var circle = paper.circle(store.locationX, store.locationY, store.hits);
-
-                            circle.hover(function(){
-                                drawPopUp(store);
-                                circle.attr({"stroke": "#E3E3E3"});
-                              },
-                              function(){
-                                circle.attr({"stroke": "#000"});
-                            });
-                            // Sets the fill attribute of the circle to red (#f00)
-                            circle.attr("fill", "#f00");
-
-                            // Sets the stroke attribute of the circle to white
-                            circle.attr("stroke", "#fff");
-                        });
-                    }, true);
 
 
+            _.each(scope.stores, function(store){
+                var circle = paper.circle(store.locationX, store.locationY, store.hits);
 
+                    circle.hover(function(){
+                        drawPopUp(store);
+                        circle.attr({"stroke": "#E3E3E3"});
+                      },
+                      function(){
+                        circle.attr({"stroke": "#000"});
+                    });
+                    // Sets the fill attribute of the circle to red (#f00)
+                    circle.attr("fill", "#f00");
+
+                    // Sets the stroke attribute of the circle to white
+                    circle.attr("stroke", "#fff");
+                });
 
             }
 
