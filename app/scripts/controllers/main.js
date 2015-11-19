@@ -68,7 +68,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
                     ctx.stroke();
                 }
                 _.each(scope.stores, function(point){
-                    draw(point.x,point.y,point.x + 200,point.y+200);
+                    draw(point.locationX, point.locationY,point.locationX + 200,point.locationY+200);
                 });
 
             }

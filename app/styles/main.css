@@ -83,12 +83,26 @@ body {
 }
 heat-map {
     position: absolute;
-    width: 1200px;
-    height: 850px;
-    left: 0;
+    width: 800px;
+    height: 650px;
+    float:left;
+
 }
 
 heat-map div {
      height: 100%;
-     background-image: url('../images/mall-floor-plan.png')
+     //background-image: url('../images/mall-floor-plan.png')
+}
+.icon {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 20px;
+}
+.backgroundmap{
+    width:800px;
+    height:600px;
+}
+.sidemenu{
+    margin-left:-100px;
 }

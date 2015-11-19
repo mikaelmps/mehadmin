@@ -1,6 +1,11 @@
-<div class="heatmap" >
-	<heat-map data="passed_data" stores="stores"></heat-map>
+
+<div class="sidemenu">
     <ul>
         <li ng-repeat="store in stores" ng-mouseenter="showStore(store)">{{store.name}}</li>
     </ul>
+</div>
+<div class="heatmap" >
+    <img src="images/mall-floor-plan.png" style="position:absolute" class="backgroundmap"/>
+	<heat-map data="passed_data" stores="stores"></heat-map>
+
 </div>
