@@ -1,9 +1,17 @@
 'use strict';
 
-angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
+angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 
     var points = [];
+    var API_URL = 'http://178.62.207.134';
 	function listStores() {
+
+		$http.get(API_URL + '/api/stores').success(function(response) {
+			console.log(response);
+		}).error(function(err) {
+			console.log(err);
+		});
+
 		var stores = [
 			{name: 'Store 1', locationX: 105, locationY: 110, hits: 38},
 			{name: 'Store 2', locationX: 215, locationY: 212, hits: 28},
@@ -27,7 +35,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
         console.log(store);
     }
 	// now generate some random data
-            var max = 0;
+            var max = 15;
             var width = 840;
             var height = 400;
             var len = 200;
