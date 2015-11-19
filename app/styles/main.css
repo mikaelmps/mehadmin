@@ -105,4 +105,5 @@ heat-map div {
 }
 .sidemenu{
     margin-left:-100px;
+    position:absolute;
 }

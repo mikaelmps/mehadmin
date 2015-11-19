@@ -62,11 +62,18 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                 //  container: ele.find('div')[0]
                 //});
                 //scope.heatmapInstance.setData(scope.data);
-
+                var rect, text;
                 var drawPopUp = function(store){
-                    var rect = paper.rect(store.locationX, store.locationY - 50, 100 , 200);
+                    if(rect){
+                        rect.remove();
+                    }
+                    if(text){
+                        text.remove()
+                    }
+                    rect = paper.rect(store.locationX, store.locationY - 100, 200 , 100);
                     rect.attr("fill", "#fff");
                     rect.attr("stroke", "#000");
+                    text = paper.text(store.locationX + 40, store.locationY - 80, store.name).attr({fill: '#ff0000'}).attr({stroke: '#000'})
                 };
 
                 var paper = Raphael(200, 200, 800, 1000);
