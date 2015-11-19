@@ -8,9 +8,9 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
 			{name: 'Store 1', locationX: 105, locationY: 110, hits: 38},
 			{name: 'Store 2', locationX: 215, locationY: 212, hits: 28},
 			{name: 'Store 3', locationX: 335, locationY: 314, hits: 18},
-            {name: 'Store 1', locationX: 405, locationY: 410, hits: 38},
-            {name: 'Store 2', locationX: 415, locationY: 412, hits: 28},
-            {name: 'Store 3', locationX: 435, locationY: 414, hits: 18}
+            {name: 'Store 4', locationX: 405, locationY: 410, hits: 38},
+            {name: 'Store 5', locationX: 415, locationY: 412, hits: 28},
+            {name: 'Store 6', locationX: 435, locationY: 414, hits: 18}
 		];
         points = _.map(stores, function(store){
             var ret = {};
@@ -19,10 +19,13 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
             ret.value = store.hits;
             return ret;
         })
+        $scope.stores = stores;
 	}
 
     listStores();
-
+    $scope.showStore = function(store){
+        console.log(store);
+    }
 	// now generate some random data
             var max = 0;
             var width = 840;
@@ -42,7 +45,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
         return {
             restrict: 'E',
             scope: {
-                data: '='
+                data: '=',
+                stores:'='
             },
             template: '<div container></div>',
             link: function(scope, ele, attr){
@@ -50,6 +54,23 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
                   container: ele.find('div')[0]
                 });
                 scope.heatmapInstance.setData(scope.data);
+
+                var ctx = ele.find('div')[0].firstChild.getContext('2d');
+
+                function draw(lX, lY, cX, cY){
+                    // line from
+                    ctx.moveTo(lX,lY);
+                    // to
+                    ctx.lineTo(cX,cY);
+                    // color
+                    ctx.strokeStyle = "#4bf";
+                    // draw it
+                    ctx.stroke();
+                }
+                _.each(scope.stores, function(point){
+                    draw(point.x,point.y,point.x + 200,point.y+200);
+                });
+
             }
 
         };

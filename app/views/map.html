@@ -1,3 +1,6 @@
 <div class="heatmap" >
-	<heat-map data="passed_data" ></heat-map>
+	<heat-map data="passed_data" stores="stores"></heat-map>
+    <ul>
+        <li ng-repeat="store in stores" ng-mouseenter="showStore(store)">{{store.name}}</li>
+    </ul>
 </div>
