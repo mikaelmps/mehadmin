@@ -82,6 +82,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                 	 ctx2.clearRect(0,0,c.width,c.height);
                     _.each(scope.stores, function(store){
                         if(store.marked){
+                        	console.log(store.locationX);
                             draw(store.locationX, store.locationY,store.locationX + 200,store.locationY+200);
                         }
                     });
