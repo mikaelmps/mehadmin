@@ -20,7 +20,6 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope) {
     listStores();
 
 	// now generate some random data
-            var points = [];
             var max = 0;
             var width = 840;
             var height = 400;
