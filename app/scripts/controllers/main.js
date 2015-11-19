@@ -31,9 +31,9 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 	}
 
     listStores();
-    $scope.showStore = function(store){
-        store.marked = true;
-    }
+    $scope.showStore = function(store, bool){
+        store.marked = bool;
+    };
 	// now generate some random data
             var max = 15;
             var width = 840;
@@ -56,7 +56,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                 data: '=',
                 stores:'='
             },
-            template: '<div container></div>',
+            template: '<div container><canvas id="overlay" style="width: 800px; height: 650px; posistion:absolute;"></canvas</div>',
             link: function(scope, ele, attr){
                 scope.heatmapInstance = h337.create({
                   container: ele.find('div')[0]
@@ -65,17 +65,21 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 
                 var ctx = ele.find('div')[0].firstChild.getContext('2d');
 
+                var c = document.getElementById("overlay");
+				var ctx2 = c.getContext("2d");
+
                 function draw(lX, lY, cX, cY){
                     // line from
-                    ctx.moveTo(lX,lY);
+                    ctx2.moveTo(lX,lY);
                     // to
-                    ctx.lineTo(cX,cY);
+                    ctx2.lineTo(cX,cY);
                     // color
-                    ctx.strokeStyle = "#4bf";
+                    ctx2.strokeStyle = "#4bf";
                     // draw it
-                    ctx.stroke();
+                    ctx2.stroke();
                 }
                 scope.$watch('stores' ,function(){
+                	 ctx2.clearRect(0,0,c.width,c.height);
                     _.each(scope.stores, function(store){
                         if(store.marked){
                             draw(store.locationX, store.locationY,store.locationX + 200,store.locationY+200);
