@@ -32,7 +32,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 
     listStores();
     $scope.showStore = function(store){
-        console.log(store);
+        store.marked = true;
     }
 	// now generate some random data
             var max = 15;
@@ -75,9 +75,16 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                     // draw it
                     ctx.stroke();
                 }
-                _.each(scope.stores, function(point){
-                    draw(point.locationX, point.locationY,point.locationX + 200,point.locationY+200);
-                });
+                scope.$watch('stores' ,function(){
+                    _.each(scope.stores, function(store){
+                        if(store.marked){
+                            draw(store.locationX, store.locationY,store.locationX + 200,store.locationY+200);
+                        }
+                    });
+                }, true);
+
+
+
 
             }
 
