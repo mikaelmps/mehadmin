@@ -82,10 +82,10 @@ body {
   }
 }
 heat-map {
-    width: 840px;
-    height: 400px;
-    display: block;
-
+    position: absolute;
+    width: 1200px;
+    height: 850px;
+    left: 0;
 }
 
 heat-map div {
