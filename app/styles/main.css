@@ -124,7 +124,9 @@ heat-map div {
 .navbar-nav>li>a:hover{
   color:#efefef;
 }
-
+.navbar-default .navbar-nav > li > a:hover{
+  color:#efefef;
+}
 
 .navbar-default{
   background-color: #000; 
@@ -135,12 +137,12 @@ heat-map div {
   color:#fff;
   border-right: 1px solid #000;
 }
-.navbar-default .navbar-nav>li.active>a:hover{
+.navbar-default .navbar-nav>li.active>a:hover,.navbar-default .navbar-nav>li.active>a:focus{
   background-color: #444;
   color:#fff;
   border-right: 1px solid #000;
 }
-.navbar-default .navbar-nav>li>a:active{
+.navbar-default .navbar-nav>li>a:active,.navbar-default .navbar-nav>li>a:focus{
   background-color: #444;
   color:#fff;
   border-right: 1px solid #000;
