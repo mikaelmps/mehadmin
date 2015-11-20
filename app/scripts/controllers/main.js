@@ -101,8 +101,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                "game_over": "1",
                "hits": Math.floor((Math.random()*25)+10),
                "id": "vapiano",
-               "location_x": 120,
-               "location_y": 70,
+               "location_x": 60,
+               "location_y": 145,
                "riddle_1": "German Italian Food",
                "riddle_2": "Homemade Pasta",
                "weight": "1"
@@ -112,8 +112,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                "full_name": "Lush",
                "hits": Math.floor((Math.random()*25)+10),
                "id": "lush",
-               "location_x": 180,
-               "location_y": 200,
+               "location_x": 60,
+               "location_y": 345,
                "riddle_1": "We smell",
                "riddle_2": "Bombs",
                "weight": "4"
@@ -123,8 +123,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                "full_name": "Clas Ohlson",
                "hits": Math.floor((Math.random()*25)+10),
                "id": "clas_ohlson",
-               "location_x": 210,
-               "location_y": 300,
+               "location_x": 250,
+               "location_y": 325,
                "riddle_1": "We have blue shirts",
                "riddle_2": "We have glue and grinders",
                "weight": "2"
@@ -134,8 +134,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                "full_name": "Hennes & Mauritz",
                "hits": Math.floor((Math.random()*25)+10),
                "id": "hm",
-               "location_x": 300,
-               "location_y": 80,
+               "location_x": 330,
+               "location_y": 125,
                "riddle_1": "We have jackets",
                "riddle_2": "We have shorts",
                "weight": "3"
