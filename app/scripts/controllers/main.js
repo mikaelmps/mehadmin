@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
+angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $interval) {
 
-    var points = [];
     var API_URL = 'http://178.62.207.134';
-	function listStores() {
-        var stores = [];
+        $scope.stores = [];
+        $scope.totalHits = 0;
 		// $http.get(API_URL + '/api/stores').success(function(response) {
 		// 	stores = response;
   //           points = _.map(stores, function(store){
@@ -20,12 +19,14 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
 		// }).error(function(err) {
 		// 	console.log(err);
 		// });
+
+    function getStores(){
         $scope.stores = [
            {
                "beacon_id": "22",
                "full_name": "Vapiano",
                "game_over": "1",
-               "hits": "13",
+               "hits": Math.floor((Math.random()*25)+10),
                "id": "vapiano",
                "location_x": 120,
                "location_y": 70,
@@ -36,7 +37,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
            {
                "beacon_id": "21",
                "full_name": "Lush",
-               "hits": "3",
+               "hits": Math.floor((Math.random()*25)+10),
                "id": "lush",
                "location_x": 180,
                "location_y": 200,
@@ -47,7 +48,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
            {
                "beacon_id": "23",
                "full_name": "Clas Ohlson",
-               "hits": "10",
+               "hits": Math.floor((Math.random()*25)+10),
                "id": "clas_ohlson",
                "location_x": 210,
                "location_y": 300,
@@ -58,7 +59,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
            {
                "beacon_id": "12",
                "full_name": "Hennes & Mauritz",
-               "hits": "14",
+               "hits": Math.floor((Math.random()*25)+10),
                "id": "hm",
                "location_x": 300,
                "location_y": 80,
@@ -67,13 +68,13 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                "weight": "3"
            }
         ];
-        $scope.totalHits = _.reduce($scope.stores, function(memo, store){
-            return parseInt(store.hits) + memo;
-        }, 0);
 
-	}
-
-    listStores();
+            $scope.totalHits = _.reduce($scope.stores, function(memo, store){
+                return parseInt(store.hits) + memo;
+            }, 0);
+        };
+        getStores();
+        $interval(getStores, 5000);
 
 })
 .directive('heatMap', function(){
