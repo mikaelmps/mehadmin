@@ -1,11 +1,5 @@
 <span class="badge">total visitors: {{totalHits}}</span>
-<div class="sidemenu">
 
-
-    <ul  class="nav nav-pills nav-stacked">
-        <li role="presentation" ng-repeat="store in stores" ng-mouseenter="showStore(store, true)" ng-mouseleave="showStore(store, false)"><a href="#/store/{{store.id}}"> {{store.full_name}}</a></li>
-    </ul>
-</div>
 <div class="heatmap" >
     <!--<img src="images/mall-floor-plan.png" style="position:absolute" class="backgroundmap"/>-->
 	<heat-map data="passed_data" stores="stores"></heat-map>
