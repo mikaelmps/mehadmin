@@ -2,6 +2,7 @@
 
 angular.module('mehadminApp').controller('StoreCtrl', function ($scope, $http, $routeParams) {
     this.store = $routeParams.id;
-    this.stores = [];
+    $scope.stores = [];
+    angular.element( document.querySelector('svg')).remove()
 
 });
