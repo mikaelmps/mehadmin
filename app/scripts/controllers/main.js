@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $interval) {
+angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $interval, StoreService) {
 
     var API_URL = 'http://178.62.207.134';
         $scope.stores = [];
@@ -19,62 +19,13 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
 		// }).error(function(err) {
 		// 	console.log(err);
 		// });
-
-    function getStores(){
-        $scope.stores = [
-           {
-               "beacon_id": "22",
-               "full_name": "Vapiano",
-               "game_over": "1",
-               "hits": Math.floor((Math.random()*25)+10),
-               "id": "vapiano",
-               "location_x": 120,
-               "location_y": 70,
-               "riddle_1": "German Italian Food",
-               "riddle_2": "Homemade Pasta",
-               "weight": "1"
-           },
-           {
-               "beacon_id": "21",
-               "full_name": "Lush",
-               "hits": Math.floor((Math.random()*25)+10),
-               "id": "lush",
-               "location_x": 180,
-               "location_y": 200,
-               "riddle_1": "We smell",
-               "riddle_2": "Bombs",
-               "weight": "4"
-           },
-           {
-               "beacon_id": "23",
-               "full_name": "Clas Ohlson",
-               "hits": Math.floor((Math.random()*25)+10),
-               "id": "clas_ohlson",
-               "location_x": 210,
-               "location_y": 300,
-               "riddle_1": "We have blue shirts",
-               "riddle_2": "We have glue and grinders",
-               "weight": "2"
-           },
-           {
-               "beacon_id": "12",
-               "full_name": "Hennes & Mauritz",
-               "hits": Math.floor((Math.random()*25)+10),
-               "id": "hm",
-               "location_x": 300,
-               "location_y": 80,
-               "riddle_1": "We have jackets",
-               "riddle_2": "We have shorts",
-               "weight": "3"
-           }
-        ];
-
-            $scope.totalHits = _.reduce($scope.stores, function(memo, store){
-                return parseInt(store.hits) + memo;
-            }, 0);
-        };
-        getStores();
-        $interval(getStores, 5000);
+        var update = function () {
+            StoreService.getStores();
+            $scope.totalHits = StoreService.getData().totalHits;
+            $scope.stores = StoreService.getData().stores;
+        }
+        update();
+        $interval(update, 5000);
 
 })
 .directive('heatMap', function(){
@@ -128,4 +79,72 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
             }
 
         };
-    });
+    })
+.service('StoreService', function(){
+    var historicData = [];
+    var stores = [];
+    var totalHits = 0;
+    this.getData = function(){
+        return {
+            stores: stores,
+            totalHits: totalHits,
+            historicData: historicData
+        };
+    }
+
+    this.getStores = function(){
+         stores = [
+           {
+               "beacon_id": "22",
+               "full_name": "Vapiano",
+               "game_over": "1",
+               "hits": Math.floor((Math.random()*25)+10),
+               "id": "vapiano",
+               "location_x": 120,
+               "location_y": 70,
+               "riddle_1": "German Italian Food",
+               "riddle_2": "Homemade Pasta",
+               "weight": "1"
+           },
+           {
+               "beacon_id": "21",
+               "full_name": "Lush",
+               "hits": Math.floor((Math.random()*25)+10),
+               "id": "lush",
+               "location_x": 180,
+               "location_y": 200,
+               "riddle_1": "We smell",
+               "riddle_2": "Bombs",
+               "weight": "4"
+           },
+           {
+               "beacon_id": "23",
+               "full_name": "Clas Ohlson",
+               "hits": Math.floor((Math.random()*25)+10),
+               "id": "clas_ohlson",
+               "location_x": 210,
+               "location_y": 300,
+               "riddle_1": "We have blue shirts",
+               "riddle_2": "We have glue and grinders",
+               "weight": "2"
+           },
+           {
+               "beacon_id": "12",
+               "full_name": "Hennes & Mauritz",
+               "hits": Math.floor((Math.random()*25)+10),
+               "id": "hm",
+               "location_x": 300,
+               "location_y": 80,
+               "riddle_1": "We have jackets",
+               "riddle_2": "We have shorts",
+               "weight": "3"
+           }
+
+        ];
+         totalHits =  _.reduce(stores, function(memo, store){
+                return parseInt(store.hits) + memo;
+            }, 0);
+         historicData.push(stores);
+    };
+
+})
