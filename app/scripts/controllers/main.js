@@ -57,7 +57,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
 
             scope.$watch('stores', function(){
                 paper.clear();
-                var img = paper.image("images/mall-floor-plan.png", 0, 0, 800, 1000);
+                var img = paper.image("images/mall-floor-plan-grey.png", 0, 0, 800, 1000);
                 _.each(scope.stores, function(store){
                 var circle = paper.circle(store.location_x, store.location_y, parseInt(store.hits));
 
