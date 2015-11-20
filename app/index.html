@@ -31,9 +31,9 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Map</a></li>
+              <li><a active-menu-link href="#/" menu-path="#/">Map</a></li>
               <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle">Stores <b class="caret"></b></a>
+                <a active-menu-link data-toggle="dropdown" class="dropdown-toggle" menu-path="#/store">Stores <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/store/hm">HM</a></li>
                     <li><a href="#/store/lush">Lush</a></li>
@@ -64,6 +64,9 @@
     <script src="scripts/heatmap.js"></script>
     <script src="scripts/underscore.js"></script>
     <script src="scripts/raphael.js"></script>
+    
+        <script src="scripts/directives.js"></script>
+
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>

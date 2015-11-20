@@ -16,6 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'mehadminApp.directives'
   ])
   .config(function ($routeProvider) {
     $routeProvider
