@@ -1,7 +1,9 @@
-
+<span class="badge">total visitors: {{totalHits}}</span>
 <div class="sidemenu">
-    <ul>
-        <li ng-repeat="store in stores" ng-mouseenter="showStore(store, true)" ng-mouseleave="showStore(store, false)">{{store.name}}</li>
+
+
+    <ul  class="nav nav-pills nav-stacked">
+        <li role="presentation" ng-repeat="store in stores" ng-mouseenter="showStore(store, true)" ng-mouseleave="showStore(store, false)"><a href="#/store/{{store.id}}"> {{store.full_name}}</a></li>
     </ul>
 </div>
 <div class="heatmap" >

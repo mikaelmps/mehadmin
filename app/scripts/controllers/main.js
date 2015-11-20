@@ -5,49 +5,76 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
     var points = [];
     var API_URL = 'http://178.62.207.134';
 	function listStores() {
+        var stores = [];
+		// $http.get(API_URL + '/api/stores').success(function(response) {
+		// 	stores = response;
+  //           points = _.map(stores, function(store){
+  //           var ret = {};
+  //           ret.x = store.location_x;
+  //           ret.y = store.location_y;
+  //           ret.value = store.hits;
+  //           return ret;
+  //       })
 
-		$http.get(API_URL + '/api/stores').success(function(response) {
-			console.log(response);
-		}).error(function(err) {
-			console.log(err);
-		});
+        //$scope.stores = stores;
+		// }).error(function(err) {
+		// 	console.log(err);
+		// });
+        $scope.stores = [
+           {
+               "beacon_id": "22",
+               "full_name": "Vapiano",
+               "game_over": "1",
+               "hits": "13",
+               "id": "vapiano",
+               "location_x": 120,
+               "location_y": 70,
+               "riddle_1": "German Italian Food",
+               "riddle_2": "Homemade Pasta",
+               "weight": "1"
+           },
+           {
+               "beacon_id": "21",
+               "full_name": "Lush",
+               "hits": "3",
+               "id": "lush",
+               "location_x": 180,
+               "location_y": 200,
+               "riddle_1": "We smell",
+               "riddle_2": "Bombs",
+               "weight": "4"
+           },
+           {
+               "beacon_id": "23",
+               "full_name": "Clas Ohlson",
+               "hits": "10",
+               "id": "clas_ohlson",
+               "location_x": 210,
+               "location_y": 300,
+               "riddle_1": "We have blue shirts",
+               "riddle_2": "We have glue and grinders",
+               "weight": "2"
+           },
+           {
+               "beacon_id": "12",
+               "full_name": "Hennes & Mauritz",
+               "hits": "14",
+               "id": "hm",
+               "location_x": 300,
+               "location_y": 80,
+               "riddle_1": "We have jackets",
+               "riddle_2": "We have shorts",
+               "weight": "3"
+           }
+        ];
+        $scope.totalHits = _.reduce($scope.stores, function(memo, store){
+            return parseInt(store.hits) + memo;
+        }, 0);
 
-		var stores = [
-			{name: 'Store 1', locationX: 105, locationY: 110, hits: 38},
-			{name: 'Store 2', locationX: 215, locationY: 212, hits: 28},
-			{name: 'Store 3', locationX: 335, locationY: 314, hits: 18},
-            {name: 'Store 4', locationX: 405, locationY: 410, hits: 38},
-            {name: 'Store 5', locationX: 415, locationY: 412, hits: 28},
-            {name: 'Store 6', locationX: 435, locationY: 414, hits: 18}
-		];
-        points = _.map(stores, function(store){
-            var ret = {};
-            ret.x = store.locationX;
-            ret.y = store.locationY;
-            ret.value = store.hits;
-            return ret;
-        })
-        $scope.stores = stores;
 	}
 
     listStores();
-    $scope.showStore = function(store, bool){
-        store.marked = bool;
-    };
-	// now generate some random data
-            var max = 15;
-            var width = 840;
-            var height = 400;
-            var len = 200;
 
-
-            // heatmap data format
-            $scope.passed_data = {
-                max: max,
-                data: points
-            };
-	// if you have a set of datapoints always use setData instead of addData
-	// for data initialization
 })
 .directive('heatMap', function(){
         return {
@@ -58,10 +85,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
             },
             template: '<div container><canvas id="overlay" style="width: 800px; height: 650px; posistion:absolute;"></canvas</div>',
             link: function(scope, ele, attr){
-                //scope.heatmapInstance = h337.create({
-                //  container: ele.find('div')[0]
-                //});
-                //scope.heatmapInstance.setData(scope.data);
+
                 var rect, text;
                 var drawPopUp = function(store){
                     if(rect){
@@ -70,33 +94,18 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                     if(text){
                         text.remove()
                     }
-                    rect = paper.rect(store.locationX, store.locationY - 100, 200 , 100);
+                    rect = paper.rect(parseInt(store.location_x), parseInt(store.location_y) -50 ,120 , 50);
                     rect.attr("fill", "#fff");
                     rect.attr("stroke", "#000");
-                    text = paper.text(store.locationX + 40, store.locationY - 80, store.name).attr({fill: '#ff0000'}).attr({stroke: '#000'})
+                    rect.attr('opacity', 0.8);
+                    text = paper.text(store.location_x + 60, store.location_y -30, store.full_name + "(" + store.hits + ")").attr({fill: '#ff0000'}).attr({stroke: '#000'})
                 };
 
                 var paper = Raphael(200, 200, 800, 1000);
-
-                // Creates circle at x = 50, y = 40, with radius 10
-
-
-                // var ctx = ele.find('div')[0].firstChild.getContext('2d');
-
-                // function draw(lX, lY, cX, cY){
-                //     // line from
-                //     ctx.moveTo(lX,lY);
-                //     // to
-                //     ctx.lineTo(cX,cY);
-                //     // color
-                //     ctx.strokeStyle = "#4bf";
-                //     // draw it
-                //     ctx.stroke();
-                // }
-
-
-            _.each(scope.stores, function(store){
-                var circle = paper.circle(store.locationX, store.locationY, store.hits);
+            scope.$watch('stores', function(){
+                paper.clear();
+                _.each(scope.stores, function(store){
+                var circle = paper.circle(store.location_x, store.location_y, parseInt(store.hits));
 
                     circle.hover(function(){
                         drawPopUp(store);
@@ -107,10 +116,13 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http) {
                     });
                     // Sets the fill attribute of the circle to red (#f00)
                     circle.attr("fill", "#f00");
+                    circle.attr('opacity', 0.7);
 
                     // Sets the stroke attribute of the circle to white
                     circle.attr("stroke", "#fff");
                 });
+            },true);
+
 
             }
 
