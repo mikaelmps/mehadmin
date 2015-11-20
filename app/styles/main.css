@@ -107,3 +107,11 @@ heat-map div {
     margin-left:-100px;
     position:absolute;
 }
+
+.beacon_location {
+  margin-left: 50px;
+}
+
+.store_input {
+  margin-top: 10px;
+}

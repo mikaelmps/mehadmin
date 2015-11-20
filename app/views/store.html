@@ -1,1 +1,13 @@
-<div>hej    {{store["store"]}}</div>
+<div>
+	<h2>{{store.full_name}}</h2>
+	<br>
+	<p><span>Visitors: {{store.hits}}</span></p>
+	<p><span>Beacons: {{store.beacon_id.length}}</span></p>
+	<p><span>Riddle 1:
+		<input type="text" ng-model="store.riddle_1">
+	</span></p>
+	<p><span>Riddle 2:
+		<input type="text" ng-model="store.riddle_2">
+	</span></p>
+	<button class="btn btn-primary" ng-click="update(store)">Update</button>
+</div>
