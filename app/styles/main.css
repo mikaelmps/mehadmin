@@ -115,3 +115,12 @@ heat-map div {
 .store_input {
   margin-top: 10px;
 }
+
+.navbar-nav>li>a{
+  padding-top:40px;
+  padding-bottom:40px;
+}
+.navbar-default .navbar-nav>li.active>a{
+  background-color: #000;
+  color:#fff;
+}
