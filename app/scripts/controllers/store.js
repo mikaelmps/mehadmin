@@ -18,8 +18,8 @@ angular.module('mehadminApp').controller('StoreCtrl', function ($scope, $http, $
     	"weight": "1"
     };
 
-    $scope.update = function(store) {
-    	$scope.store = store;
-    	$location.path('/');
-    }
+    // $scope.update = function(store) {
+    // 	$scope.store = store;
+    // 	$location.path('/');
+    // }
 });

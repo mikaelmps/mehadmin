@@ -32,8 +32,16 @@
 
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Map</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle">Stores <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/stores/hm">HM</a></li>
+                    <li><a href="#/stores/lush">Lush</a></li>
+                    <li><a href="#/stores/vapiano">Vapiano</a></li>
+                    <li><a href="#/stores/clas_ohlson">Clas Ohlson</a></li>
+
+                </ul>
+            </li>
             </ul>
           </div>
         </div>
@@ -61,6 +69,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/store.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>
