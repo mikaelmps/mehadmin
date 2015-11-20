@@ -118,8 +118,49 @@ heat-map div {
 .navbar-nav>li>a{
   padding-top:40px;
   padding-bottom:40px;
+  border-right: 1px solid #000;
 }
+
+.navbar-nav>li>a:hover{
+  color:#efefef;
+}
+
+
+.navbar-default{
+  background-color: #000; 
+}
+
 .navbar-default .navbar-nav>li.active>a{
-  background-color: #000;
+  background-color: #444;
   color:#fff;
+  border-right: 1px solid #000;
+}
+.navbar-default .navbar-nav>li.active>a:hover{
+  background-color: #444;
+  color:#fff;
+  border-right: 1px solid #000;
+}
+.navbar-default .navbar-nav>li>a:active{
+  background-color: #444;
+  color:#fff;
+  border-right: 1px solid #000;
+}
+.navbar-default .navbar-nav>li.dropdown>a{
+  cursor:pointer;
+}
+.navbar-default .navbar-nav>li.dropdown>a:hover{
+  color:#efefef;
+}
+.navbar-default .navbar-nav>li.open>a{
+  background-color: #444;
+  color:#fff;
+  border-right: 1px solid #000;
+
+}
+
+.navbar-default .navbar-nav>li.open>a:hover{
+  background-color: #444;
+  color:#fff;
+  border-right: 1px solid #000;
+
 }
