@@ -1,5 +1,7 @@
-<h1>Current visitors: {{totalHits}}</h1>
+
+<h2>Current visitors: {{totalHits}}</h2>
+<button class="btn" ng-class="{'btn-primary' : show_lines}" ng-click="toggle_lines()">Toggle flow lines</button>
 <div class="heatmap" >
     <!--<img src="images/mall-floor-plan.png" style="position:absolute" class="backgroundmap"/>-->
-	<heat-map data="passed_data" stores="stores"></heat-map>
+	<heat-map data="passed_data" stores="stores" show-lines="show_lines"></heat-map>
 </div>

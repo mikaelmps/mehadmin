@@ -164,5 +164,8 @@ heat-map div {
   background-color: #444;
   color:#fff;
   border-right: 1px solid #000;
-
+}
+h2{
+  display: inline-block;  
+  padding-right: 20px;
 }

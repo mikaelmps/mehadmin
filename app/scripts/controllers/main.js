@@ -3,6 +3,7 @@
 angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $interval, StoreService) {
 
     var API_URL = 'http://178.62.207.134';
+        $scope.show_lines = false;
         $scope.stores = [];
         $scope.totalHits = 0;
 		// $http.get(API_URL + '/api/stores').success(function(response) {
@@ -25,6 +26,11 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
             $scope.stores = StoreService.getData().stores;
         }
         update();
+
+        $scope.toggle_lines = function(){
+          $scope.show_lines = !$scope.show_lines;
+          update();
+        } 
         $interval(update, 5000);
 
 })
@@ -33,7 +39,8 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
             restrict: 'E',
             scope: {
                 data: '=',
-                stores:'='
+                stores:'=',
+                showLines:'='
             },
             template: '<div container><canvas id="overlay" style="width: 800px; height: 650px; posistion:absolute;"></canvas</div>',
             link: function(scope, ele, attr){
@@ -70,12 +77,34 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                     });
                     // Sets the fill attribute of the circle to red (#f00)
                     circle.attr("fill", "#8A52B6");
-                    circle.attr('opacity', 0.7);
+                    circle.attr('opacity', 1);
 
                     // Sets the stroke attribute of the circle to white
                     circle.attr("stroke", "#fff");
                     circle.attr("stroke-width", 0);
                 });
+
+                if (scope.showLines){
+                  var edges = [];
+                  var popable_stores = _.clone(scope.stores);
+                  while(popable_stores.length>1){
+                    var s = popable_stores.pop();
+                    console.log(s);
+                    _.each(popable_stores,function(z){
+                      edges.push([{y:s.location_y,x:s.location_x},{y:z.location_y,x:z.location_x},Math.abs(s.hits-z.hits)]);
+                    });
+                  }
+                  console.log(edges);
+
+                  _.each(edges, function(line){
+                    console.log(line);
+                    var l = paper.path( ["M", line[0].x, line[0].y, "L", line[1].x, line[1].y ] );
+                    l.attr('stroke','#8A52B6')              
+                    l.attr('stroke-width',line[2]);
+                    l.attr('opacity', 0.5);
+
+                  });
+                }
             },true);
 
 
