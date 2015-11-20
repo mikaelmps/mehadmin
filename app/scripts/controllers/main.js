@@ -69,11 +69,12 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                         circle.attr({"stroke": "#000"});
                     });
                     // Sets the fill attribute of the circle to red (#f00)
-                    circle.attr("fill", "#f00");
+                    circle.attr("fill", "#8A52B6");
                     circle.attr('opacity', 0.7);
 
                     // Sets the stroke attribute of the circle to white
                     circle.attr("stroke", "#fff");
+                    circle.attr("stroke-width", 0);
                 });
             },true);
 
