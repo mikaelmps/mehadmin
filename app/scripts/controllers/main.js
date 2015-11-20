@@ -56,6 +56,7 @@ angular.module('mehadminApp').controller('MainCtrl', function ($scope, $http, $i
                 var paper = Raphael(200, 200, 800, 1000);
             scope.$watch('stores', function(){
                 paper.clear();
+                var img = paper.image("images/mall-floor-plan.png", 0, 0, 800, 1000);
                 _.each(scope.stores, function(store){
                 var circle = paper.circle(store.location_x, store.location_y, parseInt(store.hits));
 
